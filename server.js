@@ -6,6 +6,8 @@ const morgan = require('morgan');
 // parse JSON data sent in requests to this app
 const bodyParser = require('body-parser');
 
+const {Recipes} = require('./models');
+
 // we import the ShoppingList model, which we'll
 // interact with in our GET endpoint
 const {ShoppingList} = require('./models');
@@ -21,6 +23,30 @@ app.use(morgan('common'));
 // normally you wouldn't do this. Usually your
 // server will simply expose the state of the
 // underlying database.
+
+
+Recipes.create('chocolate milk', ['cocoa', 'milk', 'sugar']);
+Recipes.create('spaghetti', ['pasta', 'oil', 'tomato sauce', 'turkey meatballs']);
+
+
+
+app.get('/recipes', (req, res) =>{
+	res.json(Recipes.get());
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ShoppingList.create('beans', 2);
 ShoppingList.create('tomatoes', 3);
 ShoppingList.create('peppers', 4);
